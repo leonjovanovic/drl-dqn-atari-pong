@@ -20,8 +20,9 @@ DQN_HYPERPARAMS = {
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 50
+MAX_GAMES = 10002
 DEVICE = 'cuda'
+BATCH_SIZE = 32
 
 #------------------------Create enviroment and agent--------------------------
 env = atari_wrappers.make_env("PongNoFrameskip-v4")#gym.make("PongNoFrameskip-v4")
@@ -42,7 +43,7 @@ while num_games < MAX_GAMES:
     agent.add_to_buffer(obs, action, new_obs, reward, done)
     # Sample a mini-batch from buffer B if B is large enough. If not skip until it is.
     # Use that mini-batch to improve NN value function approximation
-    agent.sample_and_improve()
+    agent.sample_and_improve(BATCH_SIZE)
     
     
     

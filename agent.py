@@ -47,8 +47,10 @@ class Agent():
         if self.epsilon > self.eps_end:
             self.epsilon = self.eps_start - self.num_iterations / self.eps_decay
         
-    def sample_and_improve(self):
-        
+    def sample_and_improve(self, batch_size):
+        # If buffer is big enough sample batch_size number of transitions from buffer B
+        if len(self.replay_buffer.buffer) > self.replay_buffer.minimum:
+            mini_batch = self.replay_buffer.sample(batch_size)
             
             
         
