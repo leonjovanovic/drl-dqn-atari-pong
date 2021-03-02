@@ -15,12 +15,15 @@ DQN_HYPERPARAMS = {
     'eps_end': 0.02,
     'eps_decay': 10**5,
     'buffer_size':15000,
-    'buffer_minimum':10001
+    'buffer_minimum':10001,
+    'learning_rate': 5e-5,
+    'gamma': 0.99,
+    'n_iter_update_nn': 1000
 }
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 10002
+MAX_GAMES = 250
 DEVICE = 'cuda'
 BATCH_SIZE = 32
 
@@ -45,8 +48,14 @@ while num_games < MAX_GAMES:
     # Use that mini-batch to improve NN value function approximation
     agent.sample_and_improve(BATCH_SIZE)
     
+    obs = new_obs
+    if(done):
+        num_games = num_games + 1
+        agent.print_info()
+        agent.reset_parameters()
+        obs = env.reset()
+        
     
     
     
-    num_games = num_games + 1
-    gym.wrappers.Monitor.close(env)
+gym.wrappers.Monitor.close(env)
