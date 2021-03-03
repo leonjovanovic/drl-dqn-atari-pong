@@ -17,7 +17,7 @@ class Agent():
     
     Transition = namedtuple('Transition',('state', 'action', 'next_state', 'reward', 'done'), rename = False) # 'rename' means not to overwrite invalid field
     
-    def __init__(self, env, hyperparameters, device):
+    def __init__(self, env, hyperparameters, device, writer):
         self.eps_start = hyperparameters['eps_start']
         self.eps_end = hyperparameters['eps_end']
         self.eps_decay = hyperparameters['eps_decay']
@@ -27,6 +27,7 @@ class Agent():
         
         self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'])
         self.replay_buffer = ReplayBuffer(hyperparameters['buffer_size'], hyperparameters['buffer_minimum'])
+        self.summary_writer = writer
         
         self.num_iterations = 0
         self.total_reward = 0
@@ -80,9 +81,16 @@ class Agent():
     def print_info(self):
         #print(self.num_iterations, self.ts_frame, time.time(), self.ts)
         fps = (self.num_iterations-self.ts_frame)/(time.time()-self.ts)
-        print('%d %d rew:%d mean_rew:%.2f fps:%d, loss:%.4f' % (self.num_iterations, self.num_games, self.total_reward, np.mean(self.rewards[-40:]), fps, np.mean(self.total_loss)))
+        print('%d %d rew:%d mean_rew:%.2f fps:%d, eps:%.2f, loss:%.4f' % (self.num_iterations, self.num_games, self.total_reward, np.mean(self.rewards[-40:]), fps, self.epsilon, np.mean(self.total_loss)))
         self.ts_frame = self.num_iterations
         self.ts = time.time()
+        
+        if self.summary_writer != None:
+            self.summary_writer.add_scalar('reward', self.total_reward, self.num_games)
+            self.summary_writer.add_scalar('mean_reward', np.mean(self.rewards[-40:]), self.num_games)
+            self.summary_writer.add_scalar('10_mean_reward', np.mean(self.rewards[-10:]), self.num_games)
+            self.summary_writer.add_scalar('esilon', self.epsilon, self.num_games)
+            self.summary_writer.add_scalar('loss', np.mean(self.total_loss), self.num_games)
             
             
         

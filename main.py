@@ -7,7 +7,8 @@ Created on Sun Feb 28 11:02:18 2021
 import gym
 from agent import Agent
 import atari_wrappers
-
+from torch.utils.tensorboard import SummaryWriter
+import time
 #---------------------------------Parameters----------------------------------
 
 DQN_HYPERPARAMS = {
@@ -23,9 +24,15 @@ DQN_HYPERPARAMS = {
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 250
+MAX_GAMES = 500
 DEVICE = 'cuda'
 BATCH_SIZE = 32
+SUMMARY_WRITER = True
+
+# For TensorBoard
+LOG_DIR = 'content/runs'
+name = '_'.join([str(k)+'.'+str(v) for k,v in DQN_HYPERPARAMS.items()])
+name = 'prv'
 
 #------------------------Create enviroment and agent--------------------------
 env = atari_wrappers.make_env("PongNoFrameskip-v4")#gym.make("PongNoFrameskip-v4")
@@ -33,8 +40,10 @@ env = atari_wrappers.make_env("PongNoFrameskip-v4")#gym.make("PongNoFrameskip-v4
 if RECORD:
     env = gym.wrappers.Monitor(env, "main-"+ENV_NAME, force=True)
 obs = env.reset()
+#Create TensorBoard writer that will create graphs
+writer = SummaryWriter(log_dir=LOG_DIR+'/'+name + str(time.time())) if SUMMARY_WRITER else None
 #Create agent that will learn
-agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE)
+agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE, writer = writer)
 #--------------------------------Learning-------------------------------------
 num_games = 0
 while num_games < MAX_GAMES:
@@ -57,5 +66,7 @@ while num_games < MAX_GAMES:
         
     
     
-    
+writer.close()    
 gym.wrappers.Monitor.close(env)
+
+!tensorboard --logdir=LOG_DIR --host=127.0.0.1
