@@ -19,7 +19,8 @@ DQN_HYPERPARAMS = {
     'buffer_minimum':10001,
     'learning_rate': 5e-5,
     'gamma': 0.99,
-    'n_iter_update_nn': 1000
+    'n_iter_update_nn': 1000,
+    'multi_step': 4
 }
 
 ENV_NAME = "PongNoFrameskip-v4"
@@ -27,9 +28,9 @@ RECORD = True
 MAX_GAMES = 500
 DEVICE = 'cuda'
 BATCH_SIZE = 32
-SUMMARY_WRITER = True
 
 # For TensorBoard
+SUMMARY_WRITER = True
 LOG_DIR = 'content/runs'
 name = '_'.join([str(k)+'.'+str(v) for k,v in DQN_HYPERPARAMS.items()])
 name = 'prv'
@@ -69,4 +70,4 @@ while num_games < MAX_GAMES:
 writer.close()    
 gym.wrappers.Monitor.close(env)
 
-!tensorboard --logdir=LOG_DIR --host=127.0.0.1
+#!tensorboard --logdir="D:\Users\Leon Jovanovic\Documents\Reinforcement Learning\reinforcement-learning-atari-pong\content\runs" --host=127.0.0.1

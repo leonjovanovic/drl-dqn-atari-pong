@@ -25,8 +25,8 @@ class Agent():
         self.n_iter_update_nn = hyperparameters['n_iter_update_nn']
         self.env = env
         
-        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'])
-        self.replay_buffer = ReplayBuffer(hyperparameters['buffer_size'], hyperparameters['buffer_minimum'])
+        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'])
+        self.replay_buffer = ReplayBuffer(hyperparameters['buffer_size'], hyperparameters['buffer_minimum'], hyperparameters['multi_step'], hyperparameters['gamma'])
         self.summary_writer = writer
         
         self.num_iterations = 0

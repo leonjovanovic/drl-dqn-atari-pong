@@ -12,10 +12,11 @@ import torch.nn as nn
 
 class AgentControl():
     
-    def __init__(self, env, device, lr, gamma):
+    def __init__(self, env, device, lr, gamma, multi_step):
         self.env = env
         self.device = device
         self.gamma = gamma
+        self.multi_step = multi_step
         # We need to send both NNs to GPU hence '.to("cuda")
         self.moving_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
         self.target_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
@@ -63,7 +64,7 @@ class AgentControl():
 		# so we dont have to remember operations for backprop. Good for huge amount of operations
         next_state_action_value = next_state_action_value.detach()
         # Calculate Q-target
-        Q_target = rewards_tensor + self.gamma * next_state_action_value
+        Q_target = rewards_tensor + (self.gamma ** self.multi_step)* next_state_action_value
         # Apply MSE Loss which will be applied to all BATCH_SIZEx1 rows and output will be 1x1 
         return self.loss(curr_state_action_value, Q_target)
         
