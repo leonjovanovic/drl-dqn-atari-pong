@@ -20,7 +20,7 @@ DQN_HYPERPARAMS = {
     'learning_rate': 5e-5,
     'gamma': 0.99,
     'n_iter_update_nn': 1000,
-    'multi_step': 4
+    'multi_step': 2
 }
 
 ENV_NAME = "PongNoFrameskip-v4"
@@ -44,7 +44,7 @@ obs = env.reset()
 #Create TensorBoard writer that will create graphs
 writer = SummaryWriter(log_dir=LOG_DIR+'/'+name + str(time.time())) if SUMMARY_WRITER else None
 #Create agent that will learn
-agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE, writer = writer)
+agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE, writer = writer, max_games = MAX_GAMES)
 #--------------------------------Learning-------------------------------------
 num_games = 0
 while num_games < MAX_GAMES:

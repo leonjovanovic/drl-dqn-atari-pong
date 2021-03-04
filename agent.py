@@ -11,18 +11,20 @@ from collections import namedtuple
 import time
 import numpy as np
 import math
+import telegram_bot as tg
 
 
 class Agent():
     
     Transition = namedtuple('Transition',('state', 'action', 'next_state', 'reward', 'done'), rename = False) # 'rename' means not to overwrite invalid field
     
-    def __init__(self, env, hyperparameters, device, writer):
+    def __init__(self, env, hyperparameters, device, writer, max_games):
         self.eps_start = hyperparameters['eps_start']
         self.eps_end = hyperparameters['eps_end']
         self.eps_decay = hyperparameters['eps_decay']
         self.epsilon = hyperparameters['eps_start']
         self.n_iter_update_nn = hyperparameters['n_iter_update_nn']
+        self.max_games = max_games
         self.env = env
         
         self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'])
@@ -36,6 +38,8 @@ class Agent():
         self.ts_frame = 0
         self.ts = time.time()
         self.rewards = []
+        
+        tg.main()
         
     def select_greedy_action(self, obs):
         # Give current state to the control who will pass it to NN which will
@@ -91,6 +95,10 @@ class Agent():
             self.summary_writer.add_scalar('10_mean_reward', np.mean(self.rewards[-10:]), self.num_games)
             self.summary_writer.add_scalar('esilon', self.epsilon, self.num_games)
             self.summary_writer.add_scalar('loss', np.mean(self.total_loss), self.num_games)
+            
+        if (self.num_games % 2) == 0:
+            if tg.ready():
+                tg.info(self.num_games, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
             
             
         
