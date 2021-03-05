@@ -37,6 +37,8 @@ class Agent():
         self.total_loss = []
         self.ts_frame = 0
         self.ts = time.time()
+        self.birth_time = time.time()
+        print("Stopwatch started")
         self.rewards = []
         
         tg.main()
@@ -96,9 +98,14 @@ class Agent():
             self.summary_writer.add_scalar('esilon', self.epsilon, self.num_games)
             self.summary_writer.add_scalar('loss', np.mean(self.total_loss), self.num_games)
             
-        if (self.num_games % 2) == 0:
+        if (self.num_games % 1) == 0:
             if tg.ready():
-                tg.info(self.num_games, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
+                tg.send_info(self.num_games+1, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
+        if self.num_games == (self.max_games - 1):
+            if tg.ready():
+                tg.send_finished(time.time() - self.birth_time)
+                tg.close()
+            
             
             
         

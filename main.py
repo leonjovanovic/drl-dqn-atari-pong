@@ -25,7 +25,7 @@ DQN_HYPERPARAMS = {
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 500
+MAX_GAMES = 50
 DEVICE = 'cuda'
 BATCH_SIZE = 32
 

@@ -1,5 +1,6 @@
 
 import logging
+import datetime
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
@@ -17,11 +18,16 @@ logger = logging.getLogger(__name__)
 update_t = 1
 context_t = 1
 welcome_st = "P"
+updater = 1
 
-def info(iteration, max_iteration, mean_reward, loss):
+def send_info(iteration, max_iteration, mean_reward, loss):
     """Send a message when the command /start is issued."""
     st = 'Iteration %d/%d  Mean reward: %.2f Loss: %.4f' % (iteration, max_iteration, mean_reward, loss)
-    #st = "Iteration " + str(iteration) + "/" + str(max_iteration) + " Mean reward: " + str(mean_reward) + " Loss: " + str(loss)
+    update_t.message.reply_text(st)
+    
+    
+def send_finished(learning_time):
+    st = 'Finished! Learning time: ' + str(datetime.timedelta(seconds=int(learning_time)))
     update_t.message.reply_text(st)
     
 def start(update: Update, context: CallbackContext) -> None:
@@ -46,9 +52,14 @@ def stop(update: Update, context: CallbackContext) -> None:
     update_t = 1
     context_t = 1
 
+def close():
+    print("Closing telegram bot")
+    updater.stop()
+
 def main():
-    print("Bot started")
+    print("Telegram bot starting")
     """Start the bot."""
+    global updater
     # Create the Updater and pass it your bot's token.
     updater = Updater("1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE")
 
