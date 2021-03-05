@@ -27,7 +27,7 @@ class Agent():
         self.max_games = max_games
         self.env = env
         
-        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'])
+        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'], hyperparameters['double_dqn'])
         self.replay_buffer = ReplayBuffer(hyperparameters['buffer_size'], hyperparameters['buffer_minimum'], hyperparameters['multi_step'], hyperparameters['gamma'])
         self.summary_writer = writer
         
@@ -41,7 +41,7 @@ class Agent():
         print("Stopwatch started")
         self.rewards = []
         
-        tg.main()
+        tg.welcome_msg()
         
     def select_greedy_action(self, obs):
         # Give current state to the control who will pass it to NN which will
@@ -98,13 +98,10 @@ class Agent():
             self.summary_writer.add_scalar('esilon', self.epsilon, self.num_games)
             self.summary_writer.add_scalar('loss', np.mean(self.total_loss), self.num_games)
             
-        if (self.num_games % 1) == 0:
-            if tg.ready():
-                tg.send_info(self.num_games+1, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
+        if (self.num_games % 10) == 0:
+            tg.info_msg(self.num_games+1, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
         if self.num_games == (self.max_games - 1):
-            if tg.ready():
-                tg.send_finished(time.time() - self.birth_time)
-                tg.close()
+            tg.end_msg(time.time() - self.birth_time)
             
             
             

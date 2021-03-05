@@ -1,17 +1,15 @@
-
+'''
 import logging
 import datetime
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-'''
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 
 logger = logging.getLogger(__name__)
-'''
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -38,6 +36,8 @@ def start(update: Update, context: CallbackContext) -> None:
     global context_t
     update_t = update
     context_t = context
+    print(update)
+    print(update.message.chat.id)
     
 def ready():
     if update_t == 1:
@@ -82,7 +82,31 @@ def main():
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
     # start_polling() is non-blocking and will stop the bot gracefully.
-    #updater.idle()
+    updater.idle()
 
 if __name__ == "__main__":
     main()
+'''
+    
+import time
+from telegram import Bot
+import datetime
+
+def telegram_send(message):
+    chat_id = "876204879"
+    bot = Bot(token="1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE")
+    bot.send_message(chat_id=chat_id, text=message)
+
+def welcome_msg():
+    telegram_send("Hi! Starting learning with DQN")
+    
+def info_msg(iteration, max_iteration, mean_reward, loss):
+    st = 'Iteration %d/%d  Mean reward: %.2f Loss: %.4f' % (iteration, max_iteration, mean_reward, loss)
+    telegram_send(st)
+
+def end_msg(learning_time):
+    st = 'Finished! Learning time: ' + str(datetime.timedelta(seconds=int(learning_time)))
+    telegram_send(st)
+    print(st)
+
+

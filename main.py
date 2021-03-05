@@ -20,12 +20,13 @@ DQN_HYPERPARAMS = {
     'learning_rate': 5e-5,
     'gamma': 0.99,
     'n_iter_update_nn': 1000,
-    'multi_step': 2
+    'multi_step': 1,
+    'double_dqn': True
 }
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 50
+MAX_GAMES = 500
 DEVICE = 'cuda'
 BATCH_SIZE = 32
 
