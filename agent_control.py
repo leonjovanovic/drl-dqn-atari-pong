@@ -25,11 +25,10 @@ class AgentControl():
         self.optimizer = optim.Adam(self.moving_nn.parameters(), lr=lr)
         self.loss = nn.MSELoss()
         
-        
+        '''
         self.moving_nn, self.optimizer = amp.initialize(
-           self.moving_nn, self.optimizer, opt_level="O2", 
-           keep_batchnorm_fp32=True, loss_scale="dynamic"
-        )
+           self.moving_nn, self.optimizer, opt_level="O3"
+        )'''
         
     def select_greedy_action(self, obs):
         # We need to create tensor with data from obs. We need to transform obs to
@@ -81,9 +80,9 @@ class AgentControl():
 		# Do backpropagation, backward calculates derivative over w since we detached w'
         # Derivative values are stored inside moving_nn parameters! Since optimizer
         # is created over moving_nn he will know where to look for derivative values
-        #loss.backward()
-        with amp.scale_loss(loss, self.optimizer) as scaled_loss:
-            scaled_loss.backward()
+        loss.backward()
+        #with amp.scale_loss(loss, self.optimizer) as scaled_loss:
+        #    scaled_loss.backward()
         # One step of optimization. We optimize w and will update that w' = w after iter_update_target iterations
         # .step() calculates w = w - gradient*loss. W, gradient and loss are stored inside moving_nn parameters
         self.optimizer.step()

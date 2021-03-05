@@ -28,6 +28,7 @@ def send_info(iteration, max_iteration, mean_reward, loss):
     
 def send_finished(learning_time):
     st = 'Finished! Learning time: ' + str(datetime.timedelta(seconds=int(learning_time)))
+    print(st)
     update_t.message.reply_text(st)
     
 def start(update: Update, context: CallbackContext) -> None:
