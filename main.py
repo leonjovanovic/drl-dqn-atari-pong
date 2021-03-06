@@ -20,13 +20,13 @@ DQN_HYPERPARAMS = {
     'learning_rate': 5e-5,
     'gamma': 0.99,
     'n_iter_update_nn': 1000,
-    'multi_step': 1,
+    'multi_step': 2,
     'double_dqn': True
 }
 
 ENV_NAME = "PongNoFrameskip-v4"
 RECORD = True
-MAX_GAMES = 500
+MAX_GAMES = 400
 DEVICE = 'cuda'
 BATCH_SIZE = 32
 
@@ -35,6 +35,8 @@ SUMMARY_WRITER = True
 LOG_DIR = 'content/runs'
 name = '_'.join([str(k)+'.'+str(v) for k,v in DQN_HYPERPARAMS.items()])
 name = 'prv'
+# For Telegram
+TG_BOT = True
 
 #------------------------Create enviroment and agent--------------------------
 env = atari_wrappers.make_env("PongNoFrameskip-v4")#gym.make("PongNoFrameskip-v4")
@@ -45,7 +47,7 @@ obs = env.reset()
 #Create TensorBoard writer that will create graphs
 writer = SummaryWriter(log_dir=LOG_DIR+'/'+name + str(time.time())) if SUMMARY_WRITER else None
 #Create agent that will learn
-agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE, writer = writer, max_games = MAX_GAMES)
+agent = Agent(env, hyperparameters = DQN_HYPERPARAMS, device = DEVICE, writer = writer, max_games = MAX_GAMES,tg_bot = TG_BOT)
 #--------------------------------Learning-------------------------------------
 num_games = 0
 while num_games < MAX_GAMES:

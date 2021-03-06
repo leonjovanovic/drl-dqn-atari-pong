@@ -23,7 +23,7 @@ class AgentControl():
         self.moving_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
         self.target_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
         self.target_nn.load_state_dict(self.moving_nn.state_dict())
-        self.optimizer = optim.Adam(self.moving_nn.parameters(), lr=lr)
+        self.optimizer = optim.RMSprop(self.moving_nn.parameters(), lr=lr)
         self.loss = nn.MSELoss()
         
         '''

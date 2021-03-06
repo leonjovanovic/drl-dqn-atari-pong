@@ -18,13 +18,14 @@ class Agent():
     
     Transition = namedtuple('Transition',('state', 'action', 'next_state', 'reward', 'done'), rename = False) # 'rename' means not to overwrite invalid field
     
-    def __init__(self, env, hyperparameters, device, writer, max_games):
+    def __init__(self, env, hyperparameters, device, writer, max_games, tg_bot):
         self.eps_start = hyperparameters['eps_start']
         self.eps_end = hyperparameters['eps_end']
         self.eps_decay = hyperparameters['eps_decay']
         self.epsilon = hyperparameters['eps_start']
         self.n_iter_update_nn = hyperparameters['n_iter_update_nn']
         self.max_games = max_games
+        self.tg_bot = tg_bot
         self.env = env
         
         self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'], hyperparameters['double_dqn'])
@@ -38,10 +39,10 @@ class Agent():
         self.ts_frame = 0
         self.ts = time.time()
         self.birth_time = time.time()
-        print("Stopwatch started")
         self.rewards = []
         
-        tg.welcome_msg()
+        if self.tg_bot:
+            tg.welcome_msg(hyperparameters['multi_step'], hyperparameters['double_dqn'])
         
     def select_greedy_action(self, obs):
         # Give current state to the control who will pass it to NN which will
@@ -97,11 +98,12 @@ class Agent():
             self.summary_writer.add_scalar('10_mean_reward', np.mean(self.rewards[-10:]), self.num_games)
             self.summary_writer.add_scalar('esilon', self.epsilon, self.num_games)
             self.summary_writer.add_scalar('loss', np.mean(self.total_loss), self.num_games)
-            
-        if (self.num_games % 10) == 0:
-            tg.info_msg(self.num_games+1, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
-        if self.num_games == (self.max_games - 1):
-            tg.end_msg(time.time() - self.birth_time)
+        
+        if self.tg_bot:            
+            if (self.num_games % 10) == 0:
+                tg.info_msg(self.num_games+1, self.max_games, np.mean(self.rewards[-40:]), np.mean(self.total_loss))
+            if self.num_games == (self.max_games - 1):
+                tg.end_msg(time.time() - self.birth_time)
             
             
             
