@@ -28,7 +28,7 @@ class Agent():
         self.tg_bot = tg_bot
         self.env = env
         
-        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'], hyperparameters['double_dqn'])
+        self.agent_control = AgentControl(env, device, hyperparameters['learning_rate'], hyperparameters['gamma'], hyperparameters['multi_step'], hyperparameters['double_dqn'], hyperparameters['dueling'])
         self.replay_buffer = ReplayBuffer(hyperparameters['buffer_size'], hyperparameters['buffer_minimum'], hyperparameters['multi_step'], hyperparameters['gamma'])
         self.summary_writer = writer
         

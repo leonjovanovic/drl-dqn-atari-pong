@@ -43,3 +43,40 @@ class DQN(nn.Module):
         # We need to flatten result of CNN and 'view' reshapes tensor to have 'batch_size' rows and data/batch_size columns (that is -1)
         cnn_output = self.conv_nn(x).view(batch_size, -1)        
         return self.linear_nn(cnn_output) # apply rest of NN
+    
+# For best understanding read http://proceedings.mlr.press/v48/wangf16.pdf and 
+# watch https://www.youtube.com/watch?v=XjsY8-P4WHM&ab_channel=AndrewMelnik
+class Dueling_DQN(nn.Module):
+    def __init__(self, input_shape, num_of_actions):
+        super(Dueling_DQN, self).__init__()
+        self.conv_nn = nn.Sequential(
+            nn.Conv2d(input_shape[0], 32, kernel_size=8, stride=4),
+			nn.BatchNorm2d(32),
+			nn.ReLU(),
+			nn.Conv2d(32, 64, kernel_size=4, stride=2),
+			nn.BatchNorm2d(64),
+			nn.ReLU(),
+			nn.Conv2d(64, 64, kernel_size=3, stride=1),
+			nn.BatchNorm2d(64),
+			nn.ReLU() 
+        )
+        cnn_output_shape = self.conv_nn(torch.zeros(1, *input_shape))
+        cnn_output_shape = int(np.prod(cnn_output_shape.size()))
+        
+        self.linear_actions = nn.Sequential(
+			nn.Linear(cnn_output_shape, 512),
+			nn.ReLU(),
+			nn.Linear(512, num_of_actions)
+        )
+        self.linear_value = nn.Sequential(
+			nn.Linear(cnn_output_shape, 512),
+			nn.ReLU(),
+			nn.Linear(512, 1)
+        )
+
+    def forward(self, x):
+        batch_size = x.size()[0]
+        cnn_output = self.conv_nn(x).view(batch_size, -1)
+        value = self.linear_value(cnn_output)
+        actions = self.linear_actions(cnn_output)
+        return value + actions  - torch.mean(actions, dim=1, keepdim=True)

@@ -7,21 +7,27 @@ Created on Sun Feb 28 19:27:50 2021
 import torch
 import numpy as np
 from neural_nets import DQN
+from neural_nets import Dueling_DQN
 import torch.optim as optim
 import torch.nn as nn
 from apex import amp
 
 class AgentControl():
     
-    def __init__(self, env, device, lr, gamma, multi_step, double_dqn):
+    def __init__(self, env, device, lr, gamma, multi_step, double_dqn, dueling):
         self.env = env
         self.device = device
         self.gamma = gamma
         self.multi_step = multi_step
         self.double_dqn = double_dqn
+        self.dueling = dueling
         # We need to send both NNs to GPU hence '.to("cuda")
-        self.moving_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
-        self.target_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
+        if not dueling:
+            self.moving_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
+            self.target_nn = DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
+        else:
+            self.moving_nn = Dueling_DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
+            self.target_nn = Dueling_DQN(input_shape = env.observation_space.shape, num_of_actions = env.action_space.n).to(device)
         self.target_nn.load_state_dict(self.moving_nn.state_dict())
         self.optimizer = optim.RMSprop(self.moving_nn.parameters(), lr=lr)
         self.loss = nn.MSELoss()
