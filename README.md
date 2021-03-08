@@ -23,7 +23,7 @@
 
 
 ## Rest of data and TensorBoard
-  Rest of training data can be found at /content/runs. If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
+  Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
   
 ```python
 LOG_DIR = "full\path\to\data"
