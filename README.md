@@ -6,6 +6,8 @@
 ![Pong Gif](images/000.gif) 
 ![Pong Gif](images/216.gif)
 
+Basic DQN: Episode 1 vs Episode 216
+
 ## Enviroment
   Atari 1600 emulator is made by OpenAI in which you can test your reinforcement algorithms on 59 different games. Deep reinforcement learning is used because input is RGB picture of current frame (210x160x3). Since RGB picture is too much computationally expensive, it is turned to grayscale. Next is downsampling and cutting image to playable area which is 84x84x1. https://gym.openai.com/envs/Pong-v0/
   
