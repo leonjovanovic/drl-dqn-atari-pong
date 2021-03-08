@@ -3,7 +3,8 @@
 ## Summary
   Goal of this aplication is to find out how accurate and effective can Deep Q-Learning (DQN) be on Atari 1600 game of Pong in OpenAI enviroment. On top of DQN, aditional improvements on same algorithm were tested including Multi-step DQN, Double DQN and Dueling DQN. Result that can be seen on graph below show that basic DQN achieves human-like accuracy after only ~110 played games and great accuracy after 300 games. Improved versions of DQN considered in this project showed some improvement in both efficiancy and accuracy.   
   
-![Pong Gif](images/pong_gif.gif)
+![Pong Gif](images/000.gif) 
+![Pong Gif](images/216.gif)
 
 ## Enviroment
   Atari 1600 emulator is made by OpenAI in which you can test your reinforcement algorithms on 59 different games. Deep reinforcement learning is used because input is RGB picture of current frame (210x160x3). Since RGB picture is too much computationally expensive, it is turned to grayscale. Next is downsampling and cutting image to playable area which is 84x84x1. https://gym.openai.com/envs/Pong-v0/
