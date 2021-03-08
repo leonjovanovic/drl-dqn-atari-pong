@@ -26,6 +26,7 @@
 
 ## Future improvements
   For further improvements on efficiency and accuracy we can do couple of things:
+  
     * Smaller epsilon decay, bigger replay memory size, longer training time may produce better results
     * Implement [Prioritized Experience Replay](https://arxiv.org/pdf/1511.05952.pdf)
     * Implement [Noisy Networks for Exploration](https://arxiv.org/pdf/1706.10295.pdf)
