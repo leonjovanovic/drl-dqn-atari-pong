@@ -23,6 +23,14 @@
 
 
 ## Rest of data and TensorBoard
+  Rest of training data can be found at /content/runs. If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
+  
+```python
+LOG_DIR = "full\path\to\data"
+tensorboard --logdir=LOG_DIR --host=127.0.0.1
+```
+and open http://localhost:6006 in your browser.
+For information about installation and further questions visit [TensorBoard github](https://github.com/tensorflow/tensorboard/blob/master/README.md)
 
 ## Future improvements
   For further improvements on efficiency and accuracy we can do couple of things:
