@@ -63,7 +63,7 @@ while num_games < MAX_GAMES:
     agent.sample_and_improve(BATCH_SIZE)
 
     obs = new_obs
-    if (done):
+    if done:
         num_games = num_games + 1
         agent.print_info()
         agent.reset_parameters()

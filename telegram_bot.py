@@ -21,4 +21,4 @@ def end_msg(learning_time):
     print(st)
 
 
-#https://api.telegram.org/bot1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE/getUpdates
+# https://api.telegram.org/bot1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE/getUpdates

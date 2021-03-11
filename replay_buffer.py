@@ -8,7 +8,7 @@ import collections
 import random
 import numpy as np
 
-class ReplayBuffer():
+class ReplayBuffer:
     def __init__(self, size, minimum, multi_step, gamma):
         self.size = size
         self.minimum = minimum
@@ -47,8 +47,7 @@ class ReplayBuffer():
                     # If we reached end of game dont look for more look ahead states
                     if self.buffer[transition + i].done:
                         i = self.multi_step
-                    
-                    
+
             states.append(self.buffer[transition].state)
             actions.append(self.buffer[transition].action)
             next_states.append(new_next_state)
@@ -57,5 +56,3 @@ class ReplayBuffer():
 
         return (np.array(states, dtype=np.float32), np.array(actions, dtype=np.int64), np.array(next_states, dtype=np.float32), np.array(rewards, dtype=np.float32), np.array(dones, dtype=np.uint8))
 
-        
-        

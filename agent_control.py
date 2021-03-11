@@ -12,8 +12,8 @@ import torch.optim as optim
 import torch.nn as nn
 from apex import amp
 
-class AgentControl():
-    
+class AgentControl:
+
     def __init__(self, env, device, lr, gamma, multi_step, double_dqn, dueling):
         self.env = env
         self.device = device
@@ -31,12 +31,12 @@ class AgentControl():
         self.target_nn.load_state_dict(self.moving_nn.state_dict())
         self.optimizer = optim.RMSprop(self.moving_nn.parameters(), lr=lr)
         self.loss = nn.MSELoss()
-        
+
         '''
         self.moving_nn, self.optimizer = amp.initialize(
            self.moving_nn, self.optimizer, opt_level="O3"
         )'''
-        
+
     def select_greedy_action(self, obs):
         # We need to create tensor with data from obs. We need to transform obs to
         # numpy array because input to NN will be list with up to 32 obs (mini batches)
@@ -46,14 +46,14 @@ class AgentControl():
         all_actions = self.moving_nn(tensor_obs)
         # .max(1) returns tensor with value and tensor with its number (1 to 6), [1].item() returns only that number 
         return all_actions.max(1)[1].item()
-    
+
     def improve(self, mini_batch):
         # Calculate loss
         loss = self.calc_loss(mini_batch)
         # Improve NN parameters
         self.improve_params(loss)
         return loss.item()
-        
+
     def calc_loss(self, mini_batch):
         states, actions, next_states, rewards, dones = mini_batch
         # Transform numpy array to Tensor and send it to GPU
@@ -62,13 +62,13 @@ class AgentControl():
         actions_tensor = torch.as_tensor(actions).to(self.device)
         rewards_tensor = torch.as_tensor(rewards, dtype=torch.float32).to(self.device)
         done_tensor = torch.as_tensor(dones, dtype=torch.uint8).to(self.device)
-        
+
         # First we need to find value of action we decided to do
         # From inputing states into NN, we will get output matrix BATCH_SIZEx6
         # Then with tensor.gather(dimension, index) we find that value with index from actions
         # Finally we use squeeze(-1) to reduce dimensions from 2 to 1
         curr_state_action_value = self.moving_nn(states_tensor).gather(1,actions_tensor[:,None]).squeeze(-1)
-        
+
         if self.double_dqn:
             # Double Q Learning will be implemented with getting max action (serial number) from first NN for each of 32 states,
             # then we get 32x6 output of second NN and we take value from 32x6 matrix that is on place of serial number from first
@@ -84,29 +84,28 @@ class AgentControl():
             # converging since if we use only one NN its not gradient descent.
             next_state_action_value = self.target_nn(next_states_tensor).max(1)[0]
         # We do differentiation for moving_nn (w or curr_state_action_value) and we dont do it for target_nn (w'),
-		# so we dont have to remember operations for backprop. Good for huge amount of operations
+        # so we dont have to remember operations for backprop. Good for huge amount of operations
         next_state_action_value = next_state_action_value.detach()
         # Calculate Q-target
-        Q_target = rewards_tensor + (self.gamma ** self.multi_step)* next_state_action_value
+        q_target = rewards_tensor + (self.gamma ** self.multi_step) * next_state_action_value
         # Apply MSE Loss which will be applied to all BATCH_SIZEx1 rows and output will be 1x1 
-        return self.loss(curr_state_action_value, Q_target)
-        
+        return self.loss(curr_state_action_value, q_target)
+
     def improve_params(self, loss):
         # Reset the grads
         self.optimizer.zero_grad()
-		# Do backpropagation, backward calculates derivative over w since we detached w'
+        # Do backpropagation, backward calculates derivative over w since we detached w'
         # Derivative values are stored inside moving_nn parameters! Since optimizer
         # is created over moving_nn he will know where to look for derivative values
         loss.backward()
-        #with amp.scale_loss(loss, self.optimizer) as scaled_loss:
+        # with amp.scale_loss(loss, self.optimizer) as scaled_loss:
         #    scaled_loss.backward()
         # One step of optimization. We optimize w and will update that w' = w after iter_update_target iterations
         # .step() calculates w = w - gradient*loss. W, gradient and loss are stored inside moving_nn parameters
         self.optimizer.step()
-        
+
     def update_target_nn(self):
         self.target_nn.load_state_dict(self.moving_nn.state_dict())
-        
-        
-    
-        
+
+
+
