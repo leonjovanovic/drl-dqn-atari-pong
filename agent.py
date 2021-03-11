@@ -5,6 +5,8 @@ Created on Sun Feb 28 11:15:15 2021
 @author: Leon Jovanovic
 """
 from numpy import random
+from sympy import hyper
+
 from agent_control import AgentControl
 from replay_buffer import ReplayBuffer
 from collections import namedtuple
@@ -42,7 +44,7 @@ class Agent():
         self.rewards = []
         
         if self.tg_bot:
-            tg.welcome_msg(hyperparameters['multi_step'], hyperparameters['double_dqn'])
+            tg.welcome_msg(hyperparameters['multi_step'], hyperparameters['double_dqn'], hyperparameters['dueling'])
         
     def select_greedy_action(self, obs):
         # Give current state to the control who will pass it to NN which will

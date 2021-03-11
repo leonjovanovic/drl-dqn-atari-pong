@@ -7,8 +7,8 @@ def telegram_send(message):
     bot = Bot(token="1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE")
     bot.send_message(chat_id=chat_id, text=message)
 
-def welcome_msg(multi_step, double_dqn):
-    st = 'Hi! Starting learning with DQN Multi-step = %d, Double DQN = %r' % (multi_step, double_dqn)
+def welcome_msg(multi_step, double_dqn, dueling):
+    st = 'Hi! Starting learning with DQN Multi-step = %d, Double DQN = %r, Dueling DQN = %r' % (multi_step, double_dqn, dueling)
     telegram_send(st)
     
 def info_msg(iteration, max_iteration, mean_reward, loss):
