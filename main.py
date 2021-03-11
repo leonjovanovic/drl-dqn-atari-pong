@@ -36,7 +36,6 @@ BATCH_SIZE = 32
 SUMMARY_WRITER = True
 LOG_DIR = 'content/runs'
 name = 'DQN Multi-step=%d,Double=%r,Dueling=%r' % (DQN_HYPERPARAMS['multi_step'], DQN_HYPERPARAMS['double_dqn'], DQN_HYPERPARAMS['dueling'])
-#name = 'prv'  # +'_'.join([str(k) + '.' + str(v) for k, v in DQN_HYPERPARAMS.items()])
 # For Telegram
 TG_BOT = True
 
