@@ -40,7 +40,7 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
 ### Algorithms
-  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of data, check out next section.
+  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of the data, check out next section.
 
 ![](images/graph_total.png)
 
