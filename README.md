@@ -43,7 +43,7 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
 ### Algorithms
-  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). For more informations about viewing all of data, check out next section.
+  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of data, check out next section.
 
 ![](images/graph_total.png)
 
@@ -55,8 +55,14 @@ Basic DQN: Episode 1 vs Episode 216
 
 ---
 
-  
+  * Mean reward over last 10 games
+    * Best efficiancy recorded: 5
+    * Best accuracy recorded: 5
 
+  * Mean reward over last 40 games
+    * Best efficiancy recorded: 5
+    * Best accuracy recorded: 5
+    
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
   
