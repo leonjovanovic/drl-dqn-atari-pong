@@ -71,7 +71,9 @@ and open http://localhost:6006 in your browser.
 For information about installation and further questions visit [TensorBoard github](https://github.com/tensorflow/tensorboard/blob/master/README.md)
 
 ## Telegram bot
-  Since every run of up to 500 games takes about 3.5 - 4.5 hours, I implemented telegram bot to send me updates on how my training is doing. It can be easily used with few steps. First step is to create new bot (sending '/newbot' command to *BotFather* and following his instructions). From *BotFather* you will get TOKEN_ID. Second step is to send any message to you bot and go to 'https://api.telegram.org/botTOKEN_ID/getUpdates' where you replace TOKEN_ID with your token. There you will find CHAT_ID (result -> 0 -> message -> from -> id = CHAT_ID). Replace **CHAT_ID** and **TOKEN_ID** in *telegram_bot.py* with yours and you are good to go.
+  Since every run of up to 500 games takes about 3.5 - 4.5 hours, I implemented telegram bot to send me updates on how my training is doing. It can be easily used with few steps. 
+  * First step is to create new bot (sending '/newbot' command to *BotFather* and following his instructions). From *BotFather* you will get TOKEN_ID. 
+  * Second step is to send any message to you bot and go to 'https://api.telegram.org/botTOKEN_ID/getUpdates' where you replace TOKEN_ID with your token. There you will find CHAT_ID (result -> 0 -> message -> from -> id = CHAT_ID). Replace **CHAT_ID** and **TOKEN_ID** in *telegram_bot.py* with yours and you are good to go.
   
 ```python
 def telegram_send(message):
