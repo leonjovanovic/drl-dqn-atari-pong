@@ -3,8 +3,8 @@ from telegram import Bot
 import datetime
 
 def telegram_send(message):
-    chat_id = "Write chat id here"
-    token = "Write token you got from Bot Father"
+    chat_id = "876204879"
+    token = "1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE"
     bot = Bot(token=token)
     bot.send_message(chat_id=chat_id, text=message)
 
@@ -22,4 +22,4 @@ def end_msg(learning_time):
     print(st)
 
 
-# https://api.telegram.org/bot1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE/getUpdates
+# https://api.telegram.org/botTOKEN_ID/getUpdates
