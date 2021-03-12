@@ -9,17 +9,17 @@
 Basic DQN: Episode 1 vs Episode 216
 
 ## Enviroment
-  Atari 1600 emulator is made by OpenAI in which you can test your reinforcement algorithms on 59 different games. Deep reinforcement learning is used because input is RGB picture of current frame (210x160x3). Since RGB picture is too much computationally expensive, it is turned to grayscale. Next is downsampling and cutting image to playable area, which size is 84x84x1. https://gym.openai.com/envs/Pong-v0/
+&nbsp;&nbsp;&nbsp;&nbsp;Atari 1600 emulator is made by OpenAI in which you can test your reinforcement algorithms on 59 different games. Deep reinforcement learning is used because input is RGB picture of current frame (210x160x3). Since RGB picture is too much computationally expensive, it is turned to grayscale. Next is downsampling and cutting image to playable area, which size is 84x84x1. https://gym.openai.com/envs/Pong-v0/
   
 ![](images/rgb_image.png)
 
 *Grayscale, downsampling and cropped*  
 
 ---
-  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is over 0 and +21 is best possible outcome.
+&nbsp;&nbsp;&nbsp;&nbsp;In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is over 0 and +21 is best possible outcome.
 
 ## DQN
-  For the DQN implementation and the choose of the hyperparameters, I mostly followed [Mnih et al.](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I improved the basic DQN, implementing some variations like **Double Q-learning**, **Dueling networks** and **Multi-step learning**. You can find them summarized by [Hessel et al.](https://arxiv.org/pdf/1710.02298.pdf). 
+&nbsp;&nbsp;&nbsp;&nbsp;For the DQN implementation and the choose of the hyperparameters, I mostly followed [Mnih et al.](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I improved the basic DQN, implementing some variations like **Double Q-learning**, **Dueling networks** and **Multi-step learning**. You can find them summarized by [Hessel et al.](https://arxiv.org/pdf/1710.02298.pdf). 
   For more in detail about each improved version of DQN you can check out these papers:
   
   * Multi-step DQN - [The "Bible" of Reinforcement Learning: Chapters 7 - Sutton & Barto](https://www.amazon.com/Reinforcement-Learning-Introduction-Adaptive-Computation/dp/0262039249/ref=as_li_ss_tl?keywords=reinforcement+learning&qid=1567849400&s=gateway&sr=8-1&linkCode=sl1&tag=andreaaffilia-20&linkId=e05d8ab8146051d903abb166926f6bce&language=en_US&tag=andreaaffilia-20)
@@ -27,10 +27,10 @@ Basic DQN: Episode 1 vs Episode 216
   * [Dueling DQN](http://proceedings.mlr.press/v48/wangf16.pdf)
 
 ## Results
-  Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21. Graphs represent how high was mean total reward (on last 40 games) after each game. Agent trained for each variation of algorithm for up to 500 games.
+&nbsp;&nbsp;&nbsp;&nbsp;Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21. Graphs represent how high was mean total reward (on last 40 games) after each game. Agent trained for each variation of algorithm for up to 500 games.
   
 ### Optimizers
-  Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
+&nbsp;&nbsp;&nbsp;&nbsp;Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
 
 ![](images/graph_optim.png)
 
@@ -40,7 +40,7 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
 ### Algorithms
-  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of the data, check out next section.
+&nbsp;&nbsp;&nbsp;&nbsp;Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of the data, check out next section.
 
 ![](images/graph_total.png)
 
@@ -61,7 +61,7 @@ Basic DQN: Episode 1 vs Episode 216
     * Best accuracy recorded: **2-step Dueling Double DQN RMSProp - 19.48 score (after 473 games)**
     
 ## Rest of data and TensorBoard
-  Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
+&nbsp;&nbsp;&nbsp;&nbsp;Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
   
 ```python
 LOG_DIR = "full\path\to\data"
@@ -71,7 +71,7 @@ and open http://localhost:6006 in your browser.
 For information about installation and further questions visit [TensorBoard github](https://github.com/tensorflow/tensorboard/blob/master/README.md)
 
 ## Telegram bot
-  Since every run of up to 500 games takes about 3.5 - 4.5 hours, I implemented telegram bot to send me updates on how my training is doing. It can be easily used with few steps. 
+&nbsp;&nbsp;&nbsp;&nbsp;Since every run of up to 500 games takes about 3.5 - 4.5 hours, I implemented telegram bot to send me updates on how my training is doing. It can be easily used with few steps. 
   * First step is to create new bot (sending '/newbot' command to *BotFather* and following his instructions). From *BotFather* you will get TOKEN_ID. 
   * Second step is to send any message to you bot and go to 'https://api.telegram.org/botTOKEN_ID/getUpdates' where you replace TOKEN_ID with your token. There you will find CHAT_ID (result -> 0 -> message -> from -> id = CHAT_ID). Replace **CHAT_ID** and **TOKEN_ID** in *telegram_bot.py* with yours and you are good to go.
   
@@ -83,7 +83,7 @@ def telegram_send(message):
     bot.send_message(chat_id=chat_id, text=message)
 ```
 ## Future improvements
-  For further improvements on efficiency and accuracy we can do couple of things:
+&nbsp;&nbsp;&nbsp;&nbsp;For further improvements on efficiency and accuracy we can do couple of things:
   
   * Smaller epsilon decay, bigger replay memory size, longer training time may produce better results
   * Implement [Prioritized Experience Replay](https://arxiv.org/pdf/1511.05952.pdf)
