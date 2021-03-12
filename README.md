@@ -16,7 +16,7 @@ Basic DQN: Episode 1 vs Episode 216
 *Grayscale, downsampling and cropped*  
 
 ---
-  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is 0 and +21 is best possible outcome.
+  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is over 0 and +21 is best possible outcome.
 
 ## DQN
   For the DQN implementation and the choose of the hyperparameters, I mostly followed [Mnih et al.](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I improved the basic DQN, implementing some variations like **Double Q-learning**, **Dueling networks** and **Multi-step learning**. You can find them summarized by [Hessel et al.](https://arxiv.org/pdf/1710.02298.pdf). 
@@ -27,10 +27,7 @@ Basic DQN: Episode 1 vs Episode 216
   * [Dueling DQN](http://proceedings.mlr.press/v48/wangf16.pdf)
 
 ## Results
-  Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21.
-  
----
-  Graphs represent how high was mean total reward (on last 40 games) after each game. Agent trained for each variation of algorithm for up to 500 games.
+  Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21. Graphs represent how high was mean total reward (on last 40 games) after each game. Agent trained for each variation of algorithm for up to 500 games.
   
 ### Optimizers
   Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
@@ -43,17 +40,26 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
 ### Algorithms
-  Few selected variations of implemented algorithms are shown below.
+  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). As for accuracy Dueling DQN mixed with other variations of DQN showed best results. For more informations about viewing all of the data, check out next section.
 
 ![](images/graph_total.png)
 
 - ![#ff7043](https://via.placeholder.com/15/ff7043/000000?text=+) `Basic DQN Adam`
-- ![#cc3311](https://via.placeholder.com/15/cc3311/000000?text=+) `Basic DQN RMSProp`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
-- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step DQN Adam`
-- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `Basic DQN RMSProp`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
+- ![#ee3377](https://via.placeholder.com/15/ee3377/000000?text=+) `2-step Dueling DQN RMSProp`
+- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step Dueling Double DQN RMSProp`
+- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step Double DQN RMSProp`
+- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `2-step DQN RMSProp`
 
+---
+
+  * Mean total reward over last 10 games
+    * Best efficiancy recorded: **2-step DQN RMSProp - after 79 games**
+    * Best accuracy recorded: **2-step Dueling Double DQN RMSProp - 20.30 score (after 444 games)**
+
+  * Mean total reward over last 40 games
+    * Best efficiancy recorded: **2-step DQN RMSProp - after 93 games**
+    * Best accuracy recorded: **2-step Dueling Double DQN RMSProp - 19.48 score (after 473 games)**
+    
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
   
