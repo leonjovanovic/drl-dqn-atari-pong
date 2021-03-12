@@ -15,6 +15,8 @@ Basic DQN: Episode 1 vs Episode 216
 
 *Grayscale, downsampling and cropped*  
 
+  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is 0 and +21 is best possible outcome.
+
 ## DQN
   For the DQN implementation and the choose of the hyperparameters, I mostly followed [Mnih et al.](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I improved the basic DQN, implementing some variations like **Double Q-learning**, **Dueling networks** and **Multi-step learning**. You can find them summarized by [Hessel et al.](https://arxiv.org/pdf/1710.02298.pdf). 
   For more in detail about each improved version of DQN you can check out these papers:
@@ -24,7 +26,11 @@ Basic DQN: Episode 1 vs Episode 216
   * [Dueling DQN](http://proceedings.mlr.press/v48/wangf16.pdf)
 
 ## Results
+  Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21.
+### Optimizers
+  Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
 
+![](images/graph_optim.png)
 
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
