@@ -16,7 +16,7 @@ Basic DQN: Episode 1 vs Episode 216
 *Grayscale, downsampling and cropped*  
 
 ---
-  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is 0 and +21 is best possible outcome.
+  In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is over 0 and +21 is best possible outcome.
 
 ## DQN
   For the DQN implementation and the choose of the hyperparameters, I mostly followed [Mnih et al.](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). I improved the basic DQN, implementing some variations like **Double Q-learning**, **Dueling networks** and **Multi-step learning**. You can find them summarized by [Hessel et al.](https://arxiv.org/pdf/1710.02298.pdf). 
@@ -55,13 +55,13 @@ Basic DQN: Episode 1 vs Episode 216
 
 ---
 
-  * Mean reward over last 10 games
-    * Best efficiancy recorded: 5
-    * Best accuracy recorded: 5
+  * Mean total reward over last 10 games
+    * Best efficiancy recorded: **2-step DQN RMSProp - after 79 games**
+    * Best accuracy recorded: **2-step Dueling Double DQN RMSProp - 20.30 score (after 444 games)**
 
-  * Mean reward over last 40 games
-    * Best efficiancy recorded: 5
-    * Best accuracy recorded: 5
+  * Mean total reward over last 40 games
+    * Best efficiancy recorded: **2-step DQN RMSProp - after 93 games**
+    * Best accuracy recorded: **2-step Dueling Double DQN RMSProp - 19.48 score (after 473 games)**
     
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
