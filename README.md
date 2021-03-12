@@ -43,16 +43,19 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
 ### Algorithms
-  Few selected variations of implemented algorithms are shown below.
+  Few selected variations of implemented algorithms are shown below. Altough it looks like DQN with 2 step and Double DQN outperformed Dueling DQN, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and DQN with Multi-step = 2 showed high variancy in results (both better and worse than Dueling DQN). For more informations about viewing all of data, check out next section.
 
 ![](images/graph_total.png)
 
 - ![#ff7043](https://via.placeholder.com/15/ff7043/000000?text=+) `Basic DQN Adam`
-- ![#cc3311](https://via.placeholder.com/15/cc3311/000000?text=+) `Basic DQN RMSProp`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
-- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step DQN Adam`
-- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `Basic DQN RMSProp`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
+- ![#ee3377](https://via.placeholder.com/15/ee3377/000000?text=+) `2-step Dueling DQN RMSProp`
+- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step Dueling Double DQN RMSProp`
+- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step Double DQN RMSProp`
+- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `2-step DQN RMSProp`
+
+---
+
+  
 
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
