@@ -28,6 +28,10 @@ Basic DQN: Episode 1 vs Episode 216
 
 ## Results
   Efficiency and accuracy are two main factors in calculating how good results are. Efficiency means how quickly agent achieves human-like level and accuracy represents how close is agent to total reward of +21.
+  
+---
+  Graphs represent how high was mean total reward (on last 40 games) after each game. Agent trained for each variation of algorithm for up to 500 games.
+  
 ### Optimizers
   Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
 
