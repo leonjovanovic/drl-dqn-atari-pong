@@ -3,8 +3,9 @@ from telegram import Bot
 import datetime
 
 def telegram_send(message):
-    chat_id = "876204879"
-    bot = Bot(token="1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE")
+    chat_id = "Write chat id here"
+    token = "Write token you got from Bot Father"
+    bot = Bot(token=token)
     bot.send_message(chat_id=chat_id, text=message)
 
 def welcome_msg(multi_step, double_dqn, dueling):
