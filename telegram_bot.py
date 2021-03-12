@@ -3,8 +3,8 @@ from telegram import Bot
 import datetime
 
 def telegram_send(message):
-    chat_id = "876204879"
-    token = "1415708047:AAGwFzLqd3C4Lq2vSqNO0151_pr8IpRwwNE"
+    chat_id = "CHAT_ID"
+    token = "TOKEN_ID"
     bot = Bot(token=token)
     bot.send_message(chat_id=chat_id, text=message)
 
