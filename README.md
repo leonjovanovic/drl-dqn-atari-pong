@@ -14,7 +14,7 @@ Basic DQN: Episode 1 vs Episode 216
 ![](images/rgb_image.png)
 
 *Grayscale, downsampling and cropped*  
-
+---
   In Pong every game is played until one side has 21 points. One point is gain when other side didnt manage to return ball. In terms of reward for our agent, he gains -1 reward if he misses ball, +1 reward if opponent misses ball and 0 reward in every other case. After one side collects 21 points total reward gained is calculated by agent. Therefore minimum total reward is -21, human-like performance is 0 and +21 is best possible outcome.
 
 ## DQN
@@ -31,6 +31,10 @@ Basic DQN: Episode 1 vs Episode 216
   Adam and RMSProp optimizers were one tested in this project. Graph with some results comparing two optimizers can be seen below. It is clear RMSProp outperformed Adam in these tests, although more test runs are needed for better average values before giving clear verdict. Some other optimizers can be tested in future, like SGD or Adamax.
 
 ![](images/graph_optim.png)
+
+- ![#00ac77](https://placehold.it/15/00ac77/000000?text=+) `Basic DQN`
+- ![#628ced](https://placehold.it/15/628ced/000000?text=+) `2-step DQN`
+- ![#df1515](https://placehold.it/15/df1515/000000?text=+) `2-step Dueling DQN`
 
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
