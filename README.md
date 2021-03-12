@@ -42,6 +42,18 @@ Basic DQN: Episode 1 vs Episode 216
 - ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step DQN Adam`
 - ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
 
+### Algorithms
+  Few selected variations of implemented algorithms are shown below.
+
+![](images/graph_total.png)
+
+- ![#ff7043](https://via.placeholder.com/15/ff7043/000000?text=+) `Basic DQN Adam`
+- ![#cc3311](https://via.placeholder.com/15/cc3311/000000?text=+) `Basic DQN RMSProp`
+- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
+- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step DQN Adam`
+- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `Basic DQN RMSProp`
+- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
+
 ## Rest of data and TensorBoard
   Rest of training data can be found at [/content/runs](https://github.com/leonjovanovic/deep-reinforcement-learning-atari-pong/tree/main/content/runs). If you wish to see it and compare with rest I recommend using TensorBoard. After installation simply change directory where data is stored and use command
   
