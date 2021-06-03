@@ -1,4 +1,4 @@
-# Deep reinforcement learning algorithms in Atari Pong
+# Deep Q-Learning algorithms on Atari game Pong
 
 ## Summary
 &nbsp;&nbsp;&nbsp;&nbsp;The goal of this application is to find out how accurate and effective can Deep Q-Learning (DQN) be on Atari 1600 game of Pong in OpenAI environment. On top of DQN, additional improvements on the same algorithm were tested, including Multi-step DQN, Double DQN and Dueling DQN. Results that can be seen on the graph below show that basic DQN achieves human-like accuracy after only ~110 played games and great accuracy after 300 games. Improved versions of DQN considered in this project showed greater efficiency and accuracy.   
