@@ -34,21 +34,21 @@ Basic DQN: Episode 1 vs Episode 216
 
 ![](images/graph_optim.png)
 
-- ![#ff7043](https://via.placeholder.com/15/ff7043/000000?text=+) `Basic DQN Adam`
-- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `Basic DQN RMSProp`
-- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step DQN Adam`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step DQN RMSProp`
+- ![#ff7043](https://via.placeholder.com/15/ff7043/ff7043.png) `Basic DQN Adam`
+- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/bbbbbb.png) `Basic DQN RMSProp`
+- ![#0077bb](https://via.placeholder.com/15/0077bb/0077bb.png) `2-step DQN Adam`
+- ![#009988](https://via.placeholder.com/15/009988/009988.png) `2-step DQN RMSProp`
 
 ### Algorithms
 &nbsp;&nbsp;&nbsp;&nbsp;A few selected variations of implemented algorithms are shown below. Although it looks like 2 step DQN and Double DQN outperformed Dueling DQN in efficiency, important note to keep in mind is that these results need to be averaged over many runs, as both Double DQN and 2 step DQN showed high variancy in results (both better and worse than Dueling DQN). As for accuracy, Dueling DQN mixed with other variations of DQN showed the best results. For more information about viewing all of the data, check out the next section.
 
 ![](images/graph_total.png)
 
-- ![#ff7043](https://via.placeholder.com/15/ff7043/000000?text=+) `Basic DQN Adam`
-- ![#ee3377](https://via.placeholder.com/15/ee3377/000000?text=+) `2-step Dueling DQN RMSProp`
-- ![#009988](https://via.placeholder.com/15/009988/000000?text=+) `2-step Dueling Double DQN RMSProp`
-- ![#0077bb](https://via.placeholder.com/15/0077bb/000000?text=+) `2-step Double DQN RMSProp`
-- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/000000?text=+) `2-step DQN RMSProp`
+- ![#ff7043](https://via.placeholder.com/15/ff7043/ff7043.png) `Basic DQN Adam`
+- ![#ee3377](https://via.placeholder.com/15/ee3377/ee3377.png) `2-step Dueling DQN RMSProp`
+- ![#009988](https://via.placeholder.com/15/009988/009988.png) `2-step Dueling Double DQN RMSProp`
+- ![#0077bb](https://via.placeholder.com/15/0077bb/0077bb.png) `2-step Double DQN RMSProp`
+- ![#bbbbbb](https://via.placeholder.com/15/bbbbbb/bbbbbb.png) `2-step DQN RMSProp`
 
 ---
 
